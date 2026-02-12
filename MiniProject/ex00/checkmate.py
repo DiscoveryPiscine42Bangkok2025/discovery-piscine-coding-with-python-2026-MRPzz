@@ -29,7 +29,7 @@ def checkmate(board):
     for r in range(size):
         for c in range(size):
             pos = board_list[r][c]
-
+            
             if pos == "P":
                 if 0 <= r-1 < size and 0 <= c-1 < size:
                     if r-1 == r_king and c-1 == c_king:
@@ -41,42 +41,42 @@ def checkmate(board):
                         return
 
             elif pos == "B":
-                directions = [(-1,-1), (-1,1), (1,-1), (1,1)] 
-                for dr, dc in directions:  
-                    nr, nc = r + dr, c + dc
+                patterns = [(-1,-1), (-1,1), (1,-1), (1,1)] 
+                for p_r, p_c in patterns:  
+                    nr, nc = r + p_r, c + p_c   ## ตำแหน่งใหม่ = ตำแหน่งเดิม + เวกเตอร์การเคลื่อนที่
                     while 0 <= nr < size and 0 <= nc < size: 
                         if board_list[nr][nc] == "K":  
                             print("Success, By Bishop")
                             return
                         if board_list[nr][nc] != ".":   
                             break     
-                        nr += dr   
-                        nc += dc
+                        nr += p_r     ## เอาตำแหน่งล่าสุด + เวกเตอร์เพื่อจะขยับต่อ
+                        nc += p_c
 
             elif pos == "R":
-                directions = [(-1,0), (1,0), (0,-1), (0,1)]
-                for dr, dc in directions:
-                    nr, nc = r + dr, c + dc
+                patterns = [(-1,0), (1,0), (0,-1), (0,1)]
+                for p_r, p_c in patterns:
+                    nr, nc = r + p_r, c + p_c
                     while 0 <= nr < size and 0 <= nc < size:
                         if board_list[nr][nc] == "K":
                             print("Success, By Rook")
                             return
                         if board_list[nr][nc] != ".":
                             break
-                        nr += dr
-                        nc += dc
+                        nr += p_r
+                        nc += p_c
 
             elif pos == "Q":
-                directions = [(-1,-1), (-1,1), (1,-1), (1,1), (-1,0), (1,0), (0,-1), (0,1)]
-                for dr, dc in directions:
-                    nr, nc = r + dr, c + dc
+                patterns = [(-1,-1), (-1,1), (1,-1), (1,1), (-1,0), (1,0), (0,-1), (0,1)]
+                for p_r, p_c in patterns:
+                    nr, nc = r + p_r, c + p_c
                     while 0 <= nr < size and 0 <= nc < size:
                         if board_list[nr][nc] == "K":
                             print("Success, By Queen")
                             return
                         if board_list[nr][nc] != ".":
                             break
-                        nr += dr
-                        nc += dc
+                        nr += p_r
+                        nc += p_c
 
     print("Fail")
